@@ -2,15 +2,24 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './components/Login.vue'
 import Home from './components/Home.vue'
-
+import Wellcome from './components/wellcome.vue'
+import Users from './components/user/Users.vue'
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
-    { path: '/home', component: Home }
-  ]
+    {
+      path: '/home',
+      component: Home,
+      redirect: '/wellcome', // 重定向到wellcome
+      children: [
+        { path: '/wellcome', component: Wellcome }, 
+        { path: '/users', component: Users }
+      ],
+    },
+  ],
 })
 
 // 挂载路由导航守卫
