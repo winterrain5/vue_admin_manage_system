@@ -5,7 +5,7 @@
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-card>
+    <el-card v-loading="loading">
       <el-row :gutter="20">
         <el-col :span="7">
           <el-input
@@ -67,6 +67,7 @@
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
+                @click="showSetUserRoleDialoge(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -141,6 +142,33 @@
           <el-button type="primary" @click="editUser">确 定</el-button>
         </span>
       </el-dialog>
+      <!-- 分配角色的对话框 -->
+      <el-dialog
+        title="分配角色"
+        :visible.sync="addRoleDialogVisible"
+        width="50%"
+        @close="addRoleDialogClosed"
+      >
+        <div>
+          <p>当前的用户：{{ userInfo.username }}</p>
+          <p>当前的角色：{{ userInfo.role_name }}</p>
+          <p>
+            分配新角色：
+            <el-select v-model="seletcRoleId" placeholder="请选择角色">
+              <el-option
+                v-for="item in rolesList"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </p>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="addRoleDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="setUserRole">确 定</el-button>
+        </span>
+      </el-dialog>
     </el-card>
   </div>
 </template>
@@ -178,11 +206,18 @@ export default {
         pagesize: 2,
       },
       userList: [],
+      //   角色列表
+      rolesList: [],
       total: 0,
       //   控制添加用户对话框的显示与隐藏
       addDialogVisible: false,
       //   控制修改用户对话框的显示与隐藏
       editDialogVisible: false,
+      //   控制添加角色对话框的显示与隐藏
+      addRoleDialogVisible: false,
+      userInfo: {},
+      //   选择的角色
+      seletcRoleId: '',
       //   添加用户的表单数据
       addForm: {
         username: '',
@@ -330,6 +365,33 @@ export default {
           })
         })
     },
+    // 显示分配角色对话框
+    async showSetUserRoleDialoge(userInfo) {
+      // 获取所有角色列表
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.message)
+      }
+      this.rolesList = res.data
+      this.userInfo = userInfo
+      this.addRoleDialogVisible = true
+    },
+    async setUserRole() {
+      if (!this.seletcRoleId) return this.$message.error('请选择要分配的角色')
+      const { data: res } = await this.$http.put(
+        `users/${this.userInfo.id}/role`,
+        { rid: this.seletcRoleId }
+      )
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.message)
+      }
+      this.addRoleDialogVisible = false
+      this.getUserList()
+    },
+    addRoleDialogClosed() {
+        this.seletcRoleId = ''
+        this.userInfo = {}
+    }
   },
 }
 </script>

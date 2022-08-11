@@ -4,6 +4,8 @@ import Login from './components/Login.vue'
 import Home from './components/Home.vue'
 import Wellcome from './components/wellcome.vue'
 import Users from './components/user/Users.vue'
+import Rights from './components/power/Rights.vue'
+import Roles from './components/power/Roles.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -16,7 +18,9 @@ const router = new Router({
       redirect: '/wellcome', // 重定向到wellcome
       children: [
         { path: '/wellcome', component: Wellcome }, 
-        { path: '/users', component: Users }
+        { path: '/users', component: Users },
+        { path: '/rights', component: Rights },
+        { path: '/roles', component: Roles },
       ],
     },
   ],
