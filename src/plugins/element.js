@@ -30,9 +30,12 @@ import {
   Tree,
   Select,
   Option,
-  Loading
+  Loading,
+  Cascader
 } from 'element-ui'
+import TreeTable from 'vue-table-with-tree-grid'
 
+Vue.use(Cascader)
 Vue.use(Loading)
 Vue.use(Option)
 Vue.use(Select)
@@ -64,3 +67,4 @@ Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.component(TreeTable.name, TreeTable)

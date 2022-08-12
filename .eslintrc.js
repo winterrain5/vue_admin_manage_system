@@ -22,7 +22,8 @@ module.exports = {
     'vue/no-unused-vars': 0,
     'key-spacing': 0,
     'standard/object-curly-even-spacing': 0,
-    'object-curly-spacing': 0
+    'object-curly-spacing': 0,
+    'standard/computed-property-even-spacing': 0
   },
   parserOptions: {
     parser: 'babel-eslint'

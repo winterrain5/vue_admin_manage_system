@@ -88,17 +88,17 @@
       :visible.sync="setRightDialogVisiable"
       width="50%"
     >
+      <!-- 树形控件 -->
+      <el-tree
+        :data="rightsList"
+        :props="setRightTreeProps"
+        show-checkbox
+        node-key="id"
+        :default-expand-all="true"
+        :default-checked-keys="defaultKeys"
+        ref="treeRef"
+      ></el-tree>
       <span slot="footer" class="dialog-footer">
-        <!-- 树形控件 -->
-        <el-tree
-          :data="rightsList"
-          :props="setRightTreeProps"
-          show-checkbox
-          node-key="id"
-          :default-expand-all="true"
-          :default-checked-keys="defaultKeys"
-          ref="treeRef"
-        ></el-tree>
         <el-button @click="setRightDialogVisiable = false">取 消</el-button>
         <el-button type="primary" @click="allocRights">确 定</el-button>
       </span>
@@ -123,12 +123,12 @@ export default {
         // 父子嵌套使用的字段
         children: 'children',
         // 展示的字段
-        label: 'authName',
+        label: 'authName'
       },
       //   默认选中的权限ID数组
       defaultKeys: [],
       //   选中的角色
-      roleId: '',
+      roleId: ''
     }
   },
   methods: {
@@ -145,9 +145,9 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
-      ).catch((err) => err)
+      ).catch(err => err)
 
       if (result !== 'confirm') {
         return this.$message.info('取消了删除')
@@ -178,7 +178,7 @@ export default {
       if (!node.children) {
         return arr.push(node.id)
       }
-      node.children.forEach((item) => {
+      node.children.forEach(item => {
         this.getLeafKeys(item, arr)
       })
     },
@@ -186,7 +186,7 @@ export default {
     async allocRights() {
       const keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys(),
+        ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
       const idStr = keys.join(',')
       const { data: res } = await this.$http.post(
@@ -197,8 +197,8 @@ export default {
       this.$message.success('修改成功')
       this.getRolesList()
       this.setRightDialogVisiable = false
-    },
-  },
+    }
+  }
 }
 </script>
 
