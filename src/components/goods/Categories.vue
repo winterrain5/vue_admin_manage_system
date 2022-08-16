@@ -78,7 +78,7 @@
         ref="addCateFormRef"
         label-width="100px"
       >
-        <el-form-item label="分类名称：" prop="catname">
+        <el-form-item label="分类名称：" prop="cat_name">
           <el-input v-model="addCateForm.cat_name"></el-input>
         </el-form-item>
         <el-form-item label="父级分类：">
@@ -148,7 +148,7 @@ export default {
         cat_level: 0
       },
       addCateFormRules: {
-        catname: [
+        cat_name: [
           { required: true, message: '请输入分类名称', trigger: 'blur' }
         ]
       },

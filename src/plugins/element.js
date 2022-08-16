@@ -31,10 +31,17 @@ import {
   Select,
   Option,
   Loading,
-  Cascader
+  Cascader,
+  Alert,
+  Tabs,
+  TabPane
 } from 'element-ui'
 import TreeTable from 'vue-table-with-tree-grid'
 
+
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Alert)
 Vue.use(Cascader)
 Vue.use(Loading)
 Vue.use(Option)
