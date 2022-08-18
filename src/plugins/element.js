@@ -30,20 +30,36 @@ import {
   Tree,
   Select,
   Option,
-  Loading,
   Cascader,
   Alert,
   Tabs,
-  TabPane
+  TabPane,
+  Steps,
+  Step,
+  CheckboxGroup,
+  Checkbox,
+  Upload,
+  Image
 } from 'element-ui'
 import TreeTable from 'vue-table-with-tree-grid'
+import VueQuillEditor from 'vue-quill-editor'
 
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
 
+Vue.use(VueQuillEditor, /* { default global options } */)
+
+Vue.use(Image)
+Vue.use(Upload)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(Steps)
+Vue.use(Step)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Alert)
 Vue.use(Cascader)
-Vue.use(Loading)
 Vue.use(Option)
 Vue.use(Select)
 Vue.use(Tree)

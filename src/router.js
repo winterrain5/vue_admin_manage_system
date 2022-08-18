@@ -8,7 +8,8 @@ import Rights from './components/power/Rights.vue'
 import Roles from './components/power/Roles.vue'
 import Categories from './components/goods/Categories.vue'
 import Params from './components/goods/Params.vue'
-
+import Goods from './components/goods/Goods.vue'
+import AddGoods from './components/goods/AddGoods.vue'
 
 Vue.use(Router)
 
@@ -21,15 +22,17 @@ const router = new Router({
       component: Home,
       redirect: '/wellcome', // 重定向到wellcome
       children: [
-        { path: '/wellcome', component: Wellcome }, 
+        { path: '/wellcome', component: Wellcome },
         { path: '/users', component: Users },
         { path: '/rights', component: Rights },
         { path: '/roles', component: Roles },
         { path: '/categories', component: Categories },
         { path: '/params', component: Params },
-      ],
-    },
-  ],
+        { path: '/goods', component: Goods },
+        { path: '/goods/add', component: AddGoods }
+      ]
+    }
+  ]
 })
 
 // 挂载路由导航守卫
