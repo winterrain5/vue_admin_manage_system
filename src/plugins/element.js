@@ -39,7 +39,9 @@ import {
   CheckboxGroup,
   Checkbox,
   Upload,
-  Image
+  Image,
+  Timeline,
+  TimelineItem
 } from 'element-ui'
 import TreeTable from 'vue-table-with-tree-grid'
 import VueQuillEditor from 'vue-quill-editor'
@@ -50,6 +52,8 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 
 Vue.use(VueQuillEditor, /* { default global options } */)
 
+Vue.use(TimelineItem)
+Vue.use(Timeline)
 Vue.use(Image)
 Vue.use(Upload)
 Vue.use(Checkbox)
